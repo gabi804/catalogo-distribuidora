@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { SearchBar } from './SearchBar';
 
 interface HeaderProps {
@@ -7,6 +7,17 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ onSearch }) => {
   const [showSearch, setShowSearch] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  // Detecta cuando cambia el tamaño de la pantalla
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+      if (window.innerWidth > 768) setShowSearch(false);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
     <header
@@ -15,9 +26,9 @@ export const Header: React.FC<HeaderProps> = ({ onSearch }) => {
         top: 0,
         zIndex: 1000,
         backdropFilter: 'blur(10px)',
-        backgroundColor: 'rgba(23, 25, 23, 0.9)', // tono oscuro con leve verde
+        backgroundColor: 'rgba(15, 30, 15, 0.9)',
         boxShadow: '0 4px 15px rgba(0,0,0,0.4)',
-        padding: '16px 32px',
+        padding: '16px 24px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -47,8 +58,8 @@ export const Header: React.FC<HeaderProps> = ({ onSearch }) => {
         />
         <h1
           style={{
-            fontSize: '1.6rem',
-            color: '#00e676', // verde brillante
+            fontSize: '1.5rem',
+            color: '#00e676',
             fontWeight: 600,
             letterSpacing: '1px',
             margin: 0,
@@ -58,44 +69,38 @@ export const Header: React.FC<HeaderProps> = ({ onSearch }) => {
         </h1>
       </div>
 
-      {/* Ícono o barra de búsqueda */}
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'flex-end',
-          flex: '0 0 auto',
-        }}
-      >
-        {/* 📱 En móviles: mostrar botón lupa */}
-        <button
-          onClick={() => setShowSearch(!showSearch)}
-          style={{
-            background: 'none',
-            border: 'none',
-            color: '#00e676',
-            fontSize: '1.6rem',
-            cursor: 'pointer',
-            display: 'none',
-          }}
-          className="mobile-search-btn"
-        >
-          🔍
-        </button>
-
-        {/* 💻 En escritorio o si showSearch = true */}
-        <div
-          style={{
-            width: showSearch ? '100%' : '300px',
-            transition: 'all 0.3s ease',
-          }}
-          className="search-bar-container"
-        >
-          {(showSearch || window.innerWidth > 768) && (
-            <SearchBar onSearch={onSearch} />
+      {/* Buscador o botón 🔍 */}
+      {isMobile ? (
+        <>
+          <button
+            onClick={() => setShowSearch(!showSearch)}
+            style={{
+              background: 'none',
+              border: 'none',
+              color: '#00e676',
+              fontSize: '1.8rem',
+              cursor: 'pointer',
+            }}
+          >
+            🔍
+          </button>
+          {showSearch && (
+            <div
+              style={{
+                width: '100%',
+                marginTop: '10px',
+              }}
+            >
+              <SearchBar onSearch={onSearch} />
+            </div>
           )}
+        </>
+      ) : (
+        <div style={{ width: '300px' }}>
+          <SearchBar onSearch={onSearch} />
         </div>
-      </div>
+      )}
     </header>
   );
 };
+
