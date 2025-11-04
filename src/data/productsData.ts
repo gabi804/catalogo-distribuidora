@@ -3,16 +3,19 @@
 export interface Product { // 👈 Usar 'export' aquí
   id: number;
   nombre: string;
-  codigo_sku: string;
+ // codigo_sku: string;
   url_imagen: string;
-  precio: number;
+ // precio: number;
 }
 
 // Datos de prueba con precio (reemplaza URLs y precios)
 export const initialProducts: Product[] = [ // 👈 Usar 'export' aquí
-  { id: 1, nombre: "Refresco Cola 2L", codigo_sku: "RC-2L-001", url_imagen: "/producto.img/error.png", precio: 250.50 },
-  { id: 2, nombre: "cap", codigo_sku: "LE-1L-002", url_imagen: "/producto.img/cap.png", precio: 185.00 },
-  { id: 3, nombre: "Paquete de Galletas", codigo_sku: "PG-SAL-003", url_imagen: "/producto.img/coca.webp", precio: 95.99 },
-  { id: 4, nombre: "Detergente Líquido", codigo_sku: "DL-500-004", url_imagen: "/producto.img/refresco.webp", precio: 340.25 },
-  { id: 5, nombre: "Harina de Trigo 1Kg", codigo_sku: "HT-1KG-005", url_imagen: "https://via.placeholder.com/150/FFFF00/000000?text=Harina", precio: 120.00 },
+  { id: 1, nombre: "Refresco Cola 2L",  url_imagen: "/catalogo-distribuidora/producto.img/error.png" },
+  { id: 2, nombre: "cap",  url_imagen: "/catalogo-distribuidora/producto.img/cap.png" },
+  { id: 3, nombre: "Alfajor de Maicena",  url_imagen: "/catalogo-distribuidora/producto.img/alfajorMaicena.jpeg" },
+  { id: 4, nombre: "Alfajor Negro",  url_imagen: "/catalogo-distribuidora/producto.img/alfajorNegro.jpeg" },
+  { id: 5, nombre: "Copito",  url_imagen: "/catalogo-distribuidora/producto.img/copito.jpeg" },
+
+  { id: 6, nombre: "Pan Dulce",  url_imagen: "/catalogo-distribuidora/producto.img/panDulce.jpeg" },
+  
 ];

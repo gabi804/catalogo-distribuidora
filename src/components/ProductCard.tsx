@@ -1,8 +1,7 @@
 // src/components/ProductCard.tsx
 
 import React from 'react';
-// Importa la interfaz Product desde el archivo de datos
-import { type Product } from '../data/productsData'; 
+import { type Product } from '../data/productsData';
 
 interface ProductCardProps {
   product: Product;
@@ -12,15 +11,22 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   return (
     <div
       style={{
-        
-        border: '1px solid #444', 
-        backgroundColor: '#333',   
-        color: '#f5f5f5',
-        borderRadius: '8px',
-        padding: '10px',
+        background: 'linear-gradient(180deg, #2c2c2c 0%, #1f1f1f 100%)',
+        color: '#f8f8f8',
+        borderRadius: '12px',
+        padding: '16px',
         textAlign: 'center',
-        width: '200px',
-        boxShadow: '2px 2px 5px rgba(0,0,0,0.5)',
+        width: '240px',
+        boxShadow: '0 4px 10px rgba(0,0,0,0.3)',
+        transition: 'transform 0.2s ease, box-shadow 0.3s ease',
+      }}
+      onMouseEnter={(e) => {
+        (e.currentTarget.style.transform = 'scale(1.05)');
+        (e.currentTarget.style.boxShadow = '0 6px 15px rgba(0,0,0,0.4)');
+      }}
+      onMouseLeave={(e) => {
+        (e.currentTarget.style.transform = 'scale(1)');
+        (e.currentTarget.style.boxShadow = '0 4px 10px rgba(0,0,0,0.3)');
       }}
     >
       <img
@@ -28,19 +34,16 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         alt={product.nombre}
         style={{
           width: '100%',
-          height: '150px',
-          objectFit: 'cover', 
-          borderRadius: '4px',
-          marginBottom: '10px',
+          height: '200px',
+          objectFit: 'cover',
+          borderRadius: '10px',
+          marginBottom: '12px',
         }}
       />
-      <h4 style={{ margin: '0 0 5px 0', fontSize: '1.1em' }}>{product.nombre}</h4>
-      <p style={{ margin: 0, color: '#aaa', fontSize: '0.9em' }}> 
-        SKU: **{product.codigo_sku}**
-      </p>
-      <h3 style={{ color: '#00ccff', margin: '10px 0 0 0' }}> {/* Color vibrante para el precio */}
-        ${product.precio.toFixed(2)}
+      <h3 style={{ fontSize: '1.1rem', marginBottom: '8px', fontWeight: 600 }}>
+        {product.nombre}
       </h3>
+     
     </div>
   );
 };
