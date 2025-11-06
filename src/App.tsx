@@ -1,4 +1,5 @@
 // src/App.jsx
+import './index.css';
 
 import { ProductCatalog } from './pages/ProductCatalog'; // 👈 Asegúrate de la ruta correcta
 
