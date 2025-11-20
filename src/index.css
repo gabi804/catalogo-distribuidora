@@ -1,5 +1,9 @@
+
+
 /* === Fuente general (usa Poppins desde Google Fonts) === */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+
 
 /* === Reset básico === */
 * {
@@ -82,4 +86,8 @@ button, .card, img {
   .search-bar-container input {
     width: 100%;
   }
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }

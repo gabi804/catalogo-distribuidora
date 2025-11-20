@@ -1,100 +1,109 @@
+import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWhatsapp, faInstagram, faFacebook } from '@fortawesome/free-brands-svg-icons';
-import React from 'react';
+import { motion } from 'framer-motion';
 
 export const Footer: React.FC = () => {
   return (
-    <footer
+    <motion.footer
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
       style={{
-        marginTop: '60px',
+        marginTop: '80px',
         textAlign: 'center',
-        color: '#bbb',
-        borderTop: '1px solid #333',
-        padding: '30px 10px',
-        fontFamily: 'Poppins, sans-serif',
+        color: '#ccc',
+        padding: '40px 20px 20px',
+        fontFamily: "'Poppins', sans-serif",
+        background: 'linear-gradient(180deg, #0e1a0e 0%, #111 100%)',
+        borderTop: '2px solid transparent',
+        borderImage: 'linear-gradient(90deg, #00e676, #00c853, #00e676)',
+        borderImageSlice: 1,
+        boxShadow: '0 -4px 20px rgba(0, 255, 100, 0.15)',
+        position: 'relative',
+        overflow: 'hidden',
       }}
     >
-      <p
+      <motion.p
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.3 }}
         style={{
-          fontSize: '0.95rem',
-          marginBottom: '15px',
+          fontSize: '1rem',
+          marginBottom: '25px',
+          letterSpacing: '0.5px',
         }}
       >
-        © 2025 Distribuidora Kati. 
-      </p>
+        © 2025 <span style={{ color: '#00e676', fontWeight: 600 }}>Distribuidora Kati</span>
+      </motion.p>
 
       <div
         style={{
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          gap: '25px',
-          flexWrap: 'wrap', // 🔹 Esto hace que los íconos se acomoden en varias líneas si la pantalla es chica
+          gap: '35px',
+          flexWrap: 'wrap',
         }}
       >
-        <a
-          href="https://wa.me/543492647644"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            color: '#25D366',
-            fontSize: '32px',
-            transition: 'transform 0.3s ease, text-shadow 0.3s ease',
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.transform = 'scale(1.25)';
-            e.currentTarget.style.textShadow = '0 0 10px #25D366';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.transform = 'scale(1)';
-            e.currentTarget.style.textShadow = 'none';
-          }}
-        >
-          <FontAwesomeIcon icon={faWhatsapp} />
-        </a>
-
-        <a
-          href="https://www.instagram.com/distribuidora.kati_2020"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            color: '#E1306C',
-            fontSize: '32px',
-            transition: 'transform 0.3s ease, text-shadow 0.3s ease',
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.transform = 'scale(1.25)';
-            e.currentTarget.style.textShadow = '0 0 10px #E1306C';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.transform = 'scale(1)';
-            e.currentTarget.style.textShadow = 'none';
-          }}
-        >
-          <FontAwesomeIcon icon={faInstagram} />
-        </a>
-
-        <a
-          href="https://www.facebook.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            color: '#1877F2',
-            fontSize: '32px',
-            transition: 'transform 0.3s ease, text-shadow 0.3s ease',
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.transform = 'scale(1.25)';
-            e.currentTarget.style.textShadow = '0 0 10px #1877F2';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.transform = 'scale(1)';
-            e.currentTarget.style.textShadow = 'none';
-          }}
-        >
-          <FontAwesomeIcon icon={faFacebook} />
-        </a>
+        {[
+          { icon: faWhatsapp, color: '#25D366', link: 'https://wa.me/543492647644' },
+          { icon: faInstagram, color: '#E1306C', link: 'https://www.instagram.com/distribuidora.kati_2020' },
+          { icon: faFacebook, color: '#1877F2', link: 'https://www.facebook.com' },
+        ].map((social, index) => (
+          <motion.a
+            key={index}
+            href={social.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ scale: 1.25, textShadow: `0 0 10px ${social.color}` }}
+            transition={{ type: 'spring', stiffness: 300 }}
+            style={{
+              color: social.color,
+              fontSize: '34px',
+              transition: 'color 0.3s ease',
+            }}
+          >
+            <FontAwesomeIcon icon={social.icon} />
+          </motion.a>
+        ))}
       </div>
-    </footer>
+
+      {/* 🔹 Línea con brillo animado */}
+      <div
+        style={{
+          position: 'relative',
+          height: '3px',
+          width: '100%',
+          background: 'linear-gradient(90deg, #00c853, #00e676, #00c853)',
+          marginTop: '35px',
+          borderRadius: '2px',
+          overflow: 'hidden',
+        }}
+      >
+        <motion.div
+          animate={{ x: ['-100%', '100%'] }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            ease: 'linear',
+          }}
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            height: '100%',
+            width: '25%',
+            background: 'linear-gradient(90deg, transparent, #aaffcc, transparent)',
+            opacity: 0.8,
+          }}
+        />
+      </div>
+      {/* 🔹 Botón flotante para ir al panel de edición */}
+      
+    </motion.footer>
+
   );
 };
+
+

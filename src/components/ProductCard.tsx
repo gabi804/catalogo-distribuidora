@@ -2,6 +2,8 @@
 
 import React from 'react';
 import { type Product } from '../data/productsData';
+import { Typography, Card, CardMedia, CardContent, Box } from '@mui/material';
+import { motion } from 'framer-motion'; // 👈 si querés animaciones suaves
 
 interface ProductCardProps {
   product: Product;
@@ -9,41 +11,114 @@ interface ProductCardProps {
 
 export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   return (
-    <div
-      style={{
-        background: 'linear-gradient(180deg, #2c2c2c 0%, #1f1f1f 100%)',
-        color: '#f8f8f8',
-        borderRadius: '12px',
-        padding: '16px',
-        textAlign: 'center',
-        width: '240px',
-        boxShadow: '0 4px 10px rgba(0,0,0,0.3)',
-        transition: 'transform 0.2s ease, box-shadow 0.3s ease',
-      }}
-      onMouseEnter={(e) => {
-        (e.currentTarget.style.transform = 'scale(1.05)');
-        (e.currentTarget.style.boxShadow = '0 6px 15px rgba(0,0,0,0.4)');
-      }}
-      onMouseLeave={(e) => {
-        (e.currentTarget.style.transform = 'scale(1)');
-        (e.currentTarget.style.boxShadow = '0 4px 10px rgba(0,0,0,0.3)');
-      }}
+    <motion.div
+      whileHover={{ scale: 1.05 }}
+      transition={{ type: 'spring', stiffness: 200, damping: 12 }}
+      style={{ display: 'flex', justifyContent: 'center' }}
     >
-      <img
-        src={product.url_imagen}
-        alt={product.nombre}
-        style={{
+      <Card
+        sx={{
+          background: 'linear-gradient(180deg, #1e1e1e 0%, #111 100%)',
+          color: '#f8f8f8',
+          borderRadius: 4,
+          overflow: 'hidden',
+          boxShadow: '0 8px 20px rgba(0,0,0,0.4)',
+          textAlign: 'center',
           width: '100%',
-          height: '200px',
-          objectFit: 'cover',
-          borderRadius: '10px',
-          marginBottom: '12px',
+          maxWidth: 260,
+          border: '1px solid rgba(255,255,255,0.05)',
+          transition: 'all 0.3s ease',
+          '&:hover': {
+            boxShadow: '0 12px 25px rgba(0,255,150,0.2)',
+            border: '1px solid rgba(0,255,120,0.3)',
+          },
         }}
-      />
-      <h3 style={{ fontSize: '1.1rem', marginBottom: '8px', fontWeight: 600 }}>
-        {product.nombre}
-      </h3>
-     
-    </div>
+      >
+        <Box sx={{ position: 'relative' }}>
+          <CardMedia
+            component="img"
+            image={product.url_imagen}
+            alt={product.nombre}
+            sx={{
+              height: 220,
+              width: '100%',
+              objectFit: 'contain',
+              background:
+                'radial-gradient(circle at center, rgba(0,255,120,0.05) 0%, #0a0a0a 90%)',
+              transition: 'transform 0.4s ease',
+              '&:hover': {
+                transform: 'scale(1.08)',
+              },
+            }}
+          />
+
+          {/* 🔹 Sombra de brillo al pasar el mouse */}
+          <Box
+            sx={{
+              position: 'absolute',
+              bottom: 0,
+              left: 0,
+              right: 0,
+              height: '50%',
+              background:
+                'linear-gradient(0deg, rgba(0,0,0,0.8), transparent 80%)',
+            }}
+          />
+        </Box>
+
+        <CardContent sx={{ p: 2 }}>
+          <Typography
+            variant="h6"
+            sx={{
+              fontWeight: 600,
+              fontSize: '1rem',
+              mb: 1,
+              whiteSpace: 'normal',
+              wordBreak: 'break-word',
+              color: '#ffffff',
+
+            }}
+          >
+            {product.nombre}
+          </Typography>
+          {/* 🔹 Precio del producto */}
+          <Typography
+            variant="body1"
+            sx={{
+              color: '#ffffff',
+              fontWeight: 500,
+              fontSize: '1rem',
+              mb: 1,
+            }}
+          >
+            ${product.precio.toFixed(2)}
+          </Typography>
+
+          {/* 🔹 Línea decorativa */}
+          <Box
+            sx={{
+              width: '40%',
+              height: '3px',
+              background: 'linear-gradient(90deg, #00e676, #1de9b6)',
+              mx: 'auto',
+              borderRadius: 2,
+              mb: 1,
+            }}
+          />
+
+          {/* 🔹 Texto descriptivo (opcional si querés mostrar más info) */}
+          <Typography
+            variant="body2"
+            sx={{
+              color: '#ffffff',
+              fontSize: '0.9rem',
+              minHeight: '2em',
+            }}
+          >
+
+          </Typography>
+        </CardContent>
+      </Card>
+    </motion.div>
   );
 };
