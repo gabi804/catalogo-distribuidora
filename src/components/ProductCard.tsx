@@ -91,7 +91,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               mb: 1,
             }}
           >
-            ${product.precio.toFixed(2)}
+            ${Math.floor(product.precio)}
           </Typography>
 
           {/* 🔹 Línea decorativa */}
