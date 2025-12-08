@@ -97,6 +97,10 @@ export const initialProducts: Product[] = [
   { id: 86, nombre: "Alfajor Blanco", url_imagen: "/catalogo-distribuidora/producto.img/alfajorBlanco.jpeg",precio: 1500,  },
   { id: 87, nombre: "Alfajor Mixto", url_imagen: "/catalogo-distribuidora/producto.img/alfajorMixto.jpeg",precio: 1500,  },
   { id: 88, nombre: "Alfajor De Maicena", url_imagen: "/catalogo-distribuidora/producto.img/alfajorMaicenas.jpeg",precio: 1500,  },
-  { id: 89, nombre: "", url_imagen: "/catalogo-distribuidora/producto.img/.jpeg",precio: 1500,  },
-  { id: 90, nombre: "", url_imagen: "/catalogo-distribuidora/producto.img/.jpeg",precio: 1500,  },
+  { id: 89, nombre: "Frolitas X4", url_imagen: "/catalogo-distribuidora/producto.img/frolitaX4.jpeg",precio: 1500,  },
+  { id: 90, nombre: "Muffins De Limon", url_imagen: "/catalogo-distribuidora/producto.img/muffinsLimon.jpeg",precio: 1500,  },
+  { id: 91, nombre: "Muffins De Chocolate", url_imagen: "/catalogo-distribuidora/producto.img/muffinsChocolate.jpeg",precio: 1500,  },
+  { id: 92, nombre: "Hojaldre", url_imagen: "/catalogo-distribuidora/producto.img/hojaldre.jpeg",precio: 1500,  },
+  
+  
 ];
